@@ -1,65 +1,47 @@
 ---
 name: using-superpowers
-description: Use when starting any conversation - establishes how to find and use skills, requiring skill invocation before ANY response including clarifying questions
+description: Master orchestrator - triggers appropriate engineering skills based on task complexity while strictly enforcing token efficiency and lean context.
 ---
 
 <SUBAGENT-STOP>
 If you were dispatched as a subagent to execute a specific task, ignore this skill.
 </SUBAGENT-STOP>
 
-<EXTREMELY-IMPORTANT>
-If you think there is even a 1% chance a skill might apply to what you are doing, you ABSOLUTELY MUST invoke the skill.
+# Superpowers Master Workflow
 
-IF A SKILL APPLIES TO YOUR TASK, YOU DO NOT HAVE A CHOICE. YOU MUST USE IT.
+Superpowers transforms the coding agent into a disciplined senior engineer while maintaining high speed and **strict token efficiency**.
 
-This is not negotiable. You cannot rationalize your way out of this.
-</EXTREMELY-IMPORTANT>
+## 1. Complexity Tiering & Skill Selection (Token-First Approach)
 
-## The Rule
+Before jumping into code or ceremony, classify the user request:
 
-**Invoke relevant or requested skills BEFORE any response or action** — including clarifying questions, exploring the codebase, or checking files. If it turns out wrong for the situation, you don't have to use it.
+### Tier 1: Direct / Atomic (Keep It Fast & Cheap)
+- **When to use:** Quick bug fixes, single-component tweaks, styling, git operations, questions, explanations, minor adjustments.
+- **Rules:**
+  - Execute directly using concise, targeted tools.
+  - Do NOT spawn subagents.
+  - Do NOT create unnecessary markdown task checklists or multi-turn brainstorming for simple questions.
+  - Apply the `token-efficiency` principles: minimal diffs, narrow searches, zero fluff.
 
-**Before entering plan mode:** if you haven't already brainstormed, invoke the brainstorming skill first.
+### Tier 2: Complex / Multi-File Feature (Use Deep Engineering)
+- **When to use:** New product features, architectural redesigns, cross-cutting refactors, complex multi-component bugs.
+- **Rules:**
+  - **Brainstorming:** If requirements are ambiguous, clarify the scope first in concise chunks (`superpowers:brainstorming`).
+  - **Planning:** Formulate a phased, step-by-step plan (`superpowers:writing-plans`).
+  - **TDD:** Implement with test-driven discipline (`superpowers:test-driven-development`).
+  - **Verification:** Run tests and verify before claiming completion (`superpowers:verification-before-completion`).
 
-Then announce "Using [skill] to [purpose]" and follow the skill exactly. If it has a checklist, create a todo per item.
+### Tier 3: Domain-Specific Telehealth Work
+- When working on healthcare, scheduling, patient/doctor portals, or payment flows:
+  - Apply `superpowers:telehealth-fullstack` rules (advance notice, timezone handling, zero PHI logging, RBAC).
 
-## Skill Priority
+## 2. Skill Priority
 
-When multiple skills apply, process skills come first — they set the approach, then implementation skills (frontend-design, etc.) carry it out. Brainstorming and systematic-debugging are Superpowers' most common process skills, but the rule holds for any of them.
+1. **Process & Token Safety:** `token-efficiency` guides tool usage and communication style.
+2. **Domain Guidelines:** `telehealth-fullstack` sets healthtech compliance and scheduling constraints.
+3. **Engineering Process:** `brainstorming` and `systematic-debugging` set the engineering approach when needed.
 
-- "Let's build X" → superpowers:brainstorming first, then implementation skills.
-- "Fix this bug" → superpowers:systematic-debugging first, then domain skills.
+## 3. Subagent Guardrail (Crucial for Token Savings)
 
-## Red Flags
-
-These thoughts mean STOP—you're rationalizing:
-
-| Thought | Reality |
-|---------|---------|
-| "This is just a simple question" | Questions are tasks. Check for skills. |
-| "I need more context first" | Skill check comes BEFORE clarifying questions. |
-| "Let me explore the codebase first" | Skills tell you HOW to explore. Check first. |
-| "I can check git/files quickly" | Files lack conversation context. Check for skills. |
-| "Let me gather information first" | Skills tell you HOW to gather information. |
-| "This doesn't need a formal skill" | If a skill exists, use it. |
-| "I remember this skill" | Skills evolve. Read current version. |
-| "This doesn't count as a task" | Action = task. Check for skills. |
-| "The skill is overkill" | Simple things become complex. Use it. |
-| "I'll just do this one thing first" | Check BEFORE doing anything. |
-| "This feels productive" | Undisciplined action wastes time. Skills prevent this. |
-| "I know what that means" | Knowing the concept ≠ using the skill. Invoke it. |
-
-## Platform Adaptation
-
-If your harness appears here, read its reference file for special instructions:
-
-- Claude Code: `references/claude-code-tools.md`
-- Codex: `references/codex-tools.md`
-- Pi: `references/pi-tools.md`
-- Antigravity: `references/antigravity-tools.md`
-- Hermes Agent: `references/hermes-tools.md`
-- Muse: `references/muse-tools.md`
-
-## User Instructions
-
-User instructions (CLAUDE.md, AGENTS.md, GEMINI.md, etc, direct requests) take precedence over skills, which in turn override default behavior. Only skip skill workflows or instructions when your human partner has explicitly told you to.
+- Spawning a subagent multiplies token usage 3x to 5x.
+- **Rule:** Never launch subagents for linear tasks that the primary agent can finish with a few tool calls. Reserve subagents exclusively for truly independent, parallel tasks.
