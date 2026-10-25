@@ -1,6 +1,6 @@
 ---
 name: using-superpowers
-description: Master orchestrator - triggers appropriate engineering skills based on task complexity while strictly enforcing token efficiency and lean context.
+description: Use when starting any conversation - master orchestrator that triggers appropriate engineering skills based on task complexity while strictly enforcing token efficiency and lean context.
 ---
 
 <SUBAGENT-STOP>
@@ -45,3 +45,19 @@ Before jumping into code or ceremony, classify the user request:
 
 - Spawning a subagent multiplies token usage 3x to 5x.
 - **Rule:** Never launch subagents for linear tasks that the primary agent can finish with a few tool calls. Reserve subagents exclusively for truly independent, parallel tasks.
+
+## Platform Adaptation
+
+If your harness appears here, read its reference file for special instructions:
+
+- Claude Code: `references/claude-code-tools.md`
+- Codex: `references/codex-tools.md`
+- Pi: `references/pi-tools.md`
+- Antigravity: `references/antigravity-tools.md`
+- Hermes Agent: `references/hermes-tools.md`
+- Muse: `references/muse-tools.md`
+
+## User Instructions
+
+User instructions (CLAUDE.md, AGENTS.md, GEMINI.md, etc., direct requests) take precedence over skills, which in turn override default behavior. Only skip skill workflows or instructions when your human partner has explicitly told you to.
+
